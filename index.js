@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import proxy from "express-http-proxy";
+import requestIp from "request-ip";
 const app = express();
 const port = 3001;
 const apiUrl='https://api.superjob.ru/'
@@ -9,6 +10,9 @@ app.use(
     origin: true,
   })
 );
+
+app.use(requestIp.mw());
+
 app.use(
   "/",
   proxy(apiUrl, {
