@@ -60,6 +60,12 @@ app.use(
     },
   })
 );
+
+app.use((err, _req, res, _next) => {
+  console.error(err.stack);
+  res.status(500).send("Server error");
+});
+
 app.listen(port, () => {
   console.log("Server started");
 });
